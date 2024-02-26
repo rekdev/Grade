@@ -1,14 +1,14 @@
 import Title from "@/components/Title";
 import Main from "../components/Main";
 
-function Home() {
+function Search() {
   return (
     <>
       <Main>
-        <Title>Home</Title>
+        <Title>Search</Title>
       </Main>
     </>
   );
 }
 
-export default Home;
+export default Search;

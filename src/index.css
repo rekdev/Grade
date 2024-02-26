@@ -2,6 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+* Fonts */
+
+/* Noto Sans */
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins/Poppins-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins/Poppins-Medium.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins/Poppins-SemiBold.ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins/Poppins-SemiBold.ttf");
+  font-weight: 700;
+}
+
+/* Noto Sans */
+@font-face {
+  font-family: "Noto Sans";
+  src: url("./assets/fonts/NotoSans/NotoSans-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("./assets/fonts/NotoSans/NotoSans-Medium.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("./assets/fonts/NotoSans/NotoSans-SemiBold.ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("./assets/fonts/NotoSans/NotoSans-Bold.ttf");
+  font-weight: 700;
+}
+
 :root {
-    color-scheme: light;
+  color-scheme: light;
+}
+
+.ce-block h1 {
+  font-size: 30px;
+  font-weight: 600;
 }

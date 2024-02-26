@@ -1,21 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import EditorJS from "@editorjs/editorjs";
-import { useRef } from "react";
+import Header from "@editorjs/header"
+import List from "@editorjs/list"
+
 
 function Editor() {
-  const editorRef = useRef(null);
-
-  const initEditor = () => {
-    const editor = new EditorJS("editor");
-
-    editor.isReady.then(() => {
-      editorRef.current = editor;
-    });
-  };
+  const editorRef = useRef();
 
   useEffect(() => {
     if (editorRef.current === null) {
-      initEditor();
+      const editor = new EditorJS({
+        holder: "editor",
+        autofocus: true,
+        onReady: () => {
+          editorRef.current = editor;
+        },
+        tools: {
+          header: Header,
+          list: List
+        }
+      });
     }
 
     return () => {
@@ -24,7 +28,11 @@ function Editor() {
     };
   }, []);
 
-  return <div id="editor" />;
+  return (
+    <>
+      <div id="editor" />
+    </>
+  );
 }
 
 export default Editor;

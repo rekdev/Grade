@@ -8,9 +8,21 @@ dependencies:
   '@editorjs/editorjs':
     specifier: ^2.29.0
     version: 2.29.0
+  '@editorjs/header':
+    specifier: ^2.8.1
+    version: 2.8.1
+  '@editorjs/link':
+    specifier: ^2.6.2
+    version: 2.6.2
+  '@editorjs/list':
+    specifier: ^1.9.0
+    version: 1.9.0
   localforage:
     specifier: ^1.10.0
     version: 1.10.0
+  lucide-react:
+    specifier: ^0.338.0
+    version: 0.338.0(react@18.2.0)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -74,8 +86,42 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /@babel/runtime@7.23.9:
+    resolution: {integrity: sha512-0CX6F+BI2s9dkUqr08KFrAIZgNFj75rdBU/DjCyYLIaV/quFjkk6T+EJ2LkZHyZTbEV4L5p97mNkUsHl2wLFAw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
+    dev: false
+
+  /@codexteam/icons@0.0.4:
+    resolution: {integrity: sha512-V8N/TY2TGyas4wLrPIFq7bcow68b3gu8DfDt1+rrHPtXxcexadKauRJL6eQgfG7Z0LCrN4boLRawR4S9gjIh/Q==}
+    dev: false
+
+  /@codexteam/icons@0.0.5:
+    resolution: {integrity: sha512-s6H2KXhLz2rgbMZSkRm8dsMJvyUNZsEjxobBEg9ztdrb1B2H3pEzY6iTwI4XUPJWJ3c3qRKwV4TrO3J5jUdoQA==}
+    dev: false
+
   /@editorjs/editorjs@2.29.0:
     resolution: {integrity: sha512-w2BVboSHokMBd/cAOZn0UU328o3gSZ8XUvFPA2e9+ciIGKILiRSPB70kkNdmhHkuNS3q2px+vdaIFaywBl7wGA==}
+    dev: false
+
+  /@editorjs/header@2.8.1:
+    resolution: {integrity: sha512-y0HVXRP7m2W617CWo3fsb5HhXmSLaRpb9GzFx0Vkp/HEm9Dz5YO1s8tC7R8JD3MskwoYh7V0hRFQt39io/r6hA==}
+    dependencies:
+      '@codexteam/icons': 0.0.5
+    dev: false
+
+  /@editorjs/link@2.6.2:
+    resolution: {integrity: sha512-3cPx6M4ZvwDDvsi0E0fvMR3rvveAV/C0GRo1JLeZJ9cG9QgyoNolj4eu5Eqx3/r1XTC/he54qYEIZ/Dc4Lr4Ow==}
+    dependencies:
+      '@babel/runtime': 7.23.9
+      '@codexteam/icons': 0.0.4
+    dev: false
+
+  /@editorjs/list@1.9.0:
+    resolution: {integrity: sha512-BQEvZW4vi0O0dBvGNljiKxiE89vMSHoM2Tu2OzKUndoj7pY9AxqpgCh1qvwIVsJAlG4Lbt/vBFQilnoStMmI6A==}
+    dependencies:
+      '@codexteam/icons': 0.0.4
     dev: false
 
   /@esbuild/aix-ppc64@0.19.12:
@@ -1883,6 +1929,14 @@ packages:
     engines: {node: 14 || >=16.14}
     dev: true
 
+  /lucide-react@0.338.0(react@18.2.0):
+    resolution: {integrity: sha512-Uq+vcn/gp6l01GpDH8SxY6eAvO6Ur2bSU39NxEEJt35OotnVCH5q26TZEVPtJf23gTAncXd3DJQqcezIm6HA7w==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
@@ -2303,6 +2357,10 @@ packages:
       globalthis: 1.0.3
       which-builtin-type: 1.1.3
     dev: true
+
+  /regenerator-runtime@0.14.1:
+    resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
+    dev: false
 
   /regexp.prototype.flags@1.5.2:
     resolution: {integrity: sha512-NcDiDkTLuPR+++OCKB0nWafEmhg/Da8aUPLPMQbK+bxKKCm1/S5he+AqYa4PlMCVBalb4/yxIRub6qkEx5yJbw==}

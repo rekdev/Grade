@@ -1,14 +1,14 @@
 import Title from "@/components/Title";
 import Main from "../components/Main";
 
-function Home() {
+function Settings() {
   return (
     <>
       <Main>
-        <Title>Home</Title>
+        <Title>Settings</Title>
       </Main>
     </>
   );
 }
 
-export default Home;
+export default Settings;
