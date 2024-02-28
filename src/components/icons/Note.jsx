@@ -1,0 +1,42 @@
+function Note() {
+  return (
+    <svg
+      width="128"
+      height="128"
+      version="1.1"
+      viewBox="0 0 33.867 33.867"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g>
+        <path
+          d="m5 1h13l13 11-1e-6 19c0 1.108-0.892 2-2 2h-24c-1.108 0-2-0.892-2-2v-28c0-1.108 0.892-2 2-2z"
+          fill="#ceceb6"
+          stroke-width=".15928"
+        />
+        <path
+          d="m5.0961 1.0996h12.986l11.841 10.543v18.21c0 1.0619-0.85176 1.9169-1.9098 1.9169h-22.917c-1.058 0-1.9098-0.85492-1.9098-1.9169v-26.836c0-1.0619 0.85176-1.9169 1.9098-1.9169z"
+          fill="#eaeada"
+          stroke-width=".15238"
+        />
+        <path
+          d="m17.702 1 13.298 11.679h-13.298z"
+          fill="#ceceb6"
+          stroke-width=".16599"
+        />
+        <path d="m18 1 13 11h-13z" fill="#e7e7dd" stroke-width=".15928" />
+      </g>
+      <path
+        d="m18 1.2596 12.377 10.74h-12.377z"
+        fill="#f4f4ec"
+        stroke-width=".15357"
+      />
+      <g fill="#cacabe" stroke-width=".15928">
+        <rect x="7.209" y="19.03" width="19" height="1" ry=".33749" />
+        <rect x="7.209" y="22.538" width="19" height="1" ry=".33749" />
+        <rect x="7.209" y="26.047" width="19" height="1" ry=".33749" />
+      </g>
+    </svg>
+  );
+}
+
+export default Note

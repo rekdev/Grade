@@ -1,0 +1,104 @@
+ async getNote(id) {
+    const files = await this.getAll();
+    let note = null;
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      if (file.type === "note" && file.type === id) {
+        note = file;
+      }
+
+      if (file.type === "folder") {
+        let children = file.children;
+
+        for (let j = 0; j < children.length; j++) {
+          let child = children[j];
+
+          if (child.type === "note" && child.id === id) {
+            note = child;
+          }
+        }
+      }
+    }
+
+    return note;
+  }
+
+  async deleteFolder(id) {
+    const files = await this.getAll();
+
+    const newFiles = files.filter((file) => {
+      if (file.type != "folder" && folder.id != id) {
+        return file;
+      }
+    });
+
+    await db.setItem("files", newFiles);
+  }
+
+  async deleteNote() {
+    const files = await this.getAll();
+    let note = null;
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      if (file.type === "note" && file.type === id) {
+        note = file;
+      }
+
+      if (file.type === "folder") {
+        let children = file.children;
+
+        for (let j = 0; j < children.length; j++) {
+          let child = children[j];
+
+          if (child.type === "note" && child.id === id) {
+            note = child;
+          }
+        }
+      }
+    }
+
+    return note;
+  }
+
+  //try {
+      let files = await this.getAll();
+
+      const checkFile = (file, type, id) => {
+        if (file.type === type && file.id === id) {
+          return file;
+        }
+      };
+
+      const note = files.find((file) => {
+        return checkFile(file, "note", noteId);
+      });
+
+      const folderIndex = files.findIndex((file) => {
+        return checkFile(file, "folder", folderId);
+      });
+
+      if (note === undefined) {
+        throw new Error("The note does not exist.");
+      }
+
+      if (folderIndex === -1) {
+        throw new Error("The folder does not exist.");
+      }
+
+      files[folderIndex].children = files[folderIndex].children.concat(note);
+
+      files = files.filter((file) => {
+        if (file.type != "note" && file.id != noteId) {
+          return file;
+        }
+      });
+
+      console.log(files);
+      await db.setItem("files", files);
+    } catch (err) {
+      throw new Error(err);
+    }

@@ -6,7 +6,7 @@ function Toolbar() {
 
   return (
     <>
-      <nav className="fixed bottom-0 left-0 flex h-16 w-screen justify-center border-t-2 border-grade-white-500">
+      <nav className="fixed bottom-0 left-0 flex h-16 w-screen justify-center border-t-2 border-grade-white-500 bg-grade-white-100">
         <ToolbarButton href="/" n>
           <Home />
         </ToolbarButton>
@@ -17,7 +17,7 @@ function Toolbar() {
           <Bookmark />
         </ToolbarButton>
         <ToolbarButton>
-          <CircleUser/>
+          <CircleUser />
         </ToolbarButton>
       </nav>
     </>
@@ -36,7 +36,7 @@ function ToolbarButton({ children, onClick, href }) {
 
   return (
     <button
-      className={`grid h-16 w-16 place-content-center stroke-grade-black-100 *:h-7 *:w-auto ${isActive && href != undefined ? "border-b-[6px] border-grade-black-100 *:translate-y-[2.8px]" : " border-none"}`}
+      className={`grid h-16 w-16 place-content-center stroke-grade-black-100 hover:bg-grade-white-200 active:bg-grade-white-300 transition-colors *:h-7 *:w-auto ${isActive && href != undefined ? "border-b-[6px] border-grade-black-100 *:translate-y-[2.8px]" : " border-none"}`}
       onClick={() => {
         redirect(href);
         if (onClick != undefined) {

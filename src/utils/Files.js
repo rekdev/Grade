@@ -2,15 +2,6 @@ import db from "./db";
 import { v4 } from "uuid";
 
 class Files {
-  async init() {
-    try {
-      const files = await this.getAll();
-      if (files === null || files === undefined) {
-        await this.initDb();
-      }
-    } catch {}
-  }
-
   async initDb() {
     try {
       await db.setItem("files", []);
@@ -21,6 +12,11 @@ class Files {
 
   async getAll() {
     try {
+      let allElements = await db.getItem("files");
+      if (allElements === null) {
+        await this.initDb();
+        allElements = await db.getItem("files");
+      }
       return await db.getItem("files");
     } catch {
       throw new Error("An error has occurred during data retrieval.");
@@ -56,7 +52,7 @@ class Files {
         icon: "note",
         content: null,
       };
-
+      
       await db.setItem("files", files.concat(newNote));
     } catch {
       throw new Error("Can't create the note.");
@@ -64,110 +60,99 @@ class Files {
   }
 
   async moveNoteToFolder(noteId, folderId) {
-    try {
-      let files = await this.getAll();
+    let files = await this.getAll();
+    const note = await this.getFile(noteId);
+    const folder = await this.getFile(folderId);
 
-      const checkFile = (file, type, id) => {
-        if (file.type === type && file.id === id) {
-          return file;
-        }
-      };
-
-      const note = files.find((file) => {
-        return checkFile(file, "note", noteId);
-      });
-
-      const folderIndex = files.findIndex((file) => {
-        return checkFile(file, "folder", folderId);
-      });
-
-      if (note === undefined) {
-        throw new Error("The note does not exist.");
-      }
-
-      if (folderIndex === -1) {
-        throw new Error("The folder does not exist.");
-      }
-
-      files[folderIndex].children = files[folderIndex].children.concat(note);
-
-      files = files.filter((file) => {
-        if (file.type != "note" && file.id != noteId) {
-          return file;
-        }
-      });
-
-      console.log(files);
+    if (note.data.type === "note" && folder.data.type === "folder") {
+      files[folder.index].children = files[folder.index].children.concat(
+        note.data,
+      );
+      files.splice(note.index, 1);
       await db.setItem("files", files);
-    } catch (err) {
-      throw new Error(err);
+    } else {
+      throw new Error("These elements do not exist.");
     }
   }
 
-  async getNote(id) {
+  async getFile(fileId) {
     const files = await this.getAll();
-    let note = null;
+
+    let fileFinded = {
+      data: null,
+      index: null,
+      parentIndex: null,
+    };
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
-      if (file.type === "note" && file.type === id) {
-        note = file;
+      if (file.id === fileId) {
+        fileFinded.data = file;
+        fileFinded.index = i;
       }
 
-      if (file.type === "folder") {
+      if (file.type === "folder" && file.id != fileId) {
         let children = file.children;
 
         for (let j = 0; j < children.length; j++) {
-          let child = children[j];
+          const child = children[j];
 
-          if (child.type === "note" && child.id === id) {
-            note = child;
+          if (child.id === fileId) {
+            fileFinded.data = child;
+            fileFinded.index = j;
+            fileFinded.parentIndex = i;
           }
         }
       }
     }
 
-    return note;
+    return fileFinded;
   }
 
-  async deleteFolder(id) {
-    const files = await this.getAll();
+  async deleteFile(fileId) {
+    let files = await this.getAll();
+    let file = await this.getFile(fileId);
 
-    const newFiles = files.filter((file) => {
-      if (file.type != "folder" && folder.id != id) {
-        return file;
+    if (file.index != null) {
+      if (file.parentIndex === null) {
+        files.splice(file.index, 1);
+      } else {
+        files[file.parentIndex].children.splice(file.index, 1);
       }
-    });
-
-    await db.setItem("files", newFiles);
-  }
-
-  async deleteNote() {
-    const files = await this.getAll();
-    let note = null;
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-
-      if (file.type === "note" && file.type === id) {
-        note = file;
-      }
-
-      if (file.type === "folder") {
-        let children = file.children;
-
-        for (let j = 0; j < children.length; j++) {
-          let child = children[j];
-
-          if (child.type === "note" && child.id === id) {
-            note = child;
-          }
-        }
-      }
+      db.setItem("files", files);
+    } else {
+      throw new Error("The file does not exist.");
     }
+  }
 
-    return note;
+  async changeFileName(fileId, newName) {
+    const files = await this.getAll();
+    const file = await this.getFile(fileId);
+
+    if (file.index != null) {
+      if (file.parentIndex === null) {
+        files[file.index].name = newName;
+      } else {
+        files[file.parentIndex].children[file.index].name = newName;
+      }
+      db.setItem("files", files);
+    } else {
+      throw new Error("The file does not exist.");
+    }
+  }
+
+  async moveNoteToRoot(noteId) {
+    let files = await this.getAll();
+    const file = await this.getFile(noteId);
+
+    if (file.index != null && file.parentIndex != null) {
+      files[file.parentIndex].children.splice(file.index);
+      files = files.concat(file.data);
+      await db.setItem("files", files);
+    } else {
+      throw new Error("The note does not exist.");
+    }
   }
 }
 
