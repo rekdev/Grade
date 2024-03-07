@@ -21,11 +21,21 @@ function Home() {
     setOpen(open ? false : true);
   };
 
+  const orderItemsByType = (a, b) => {
+    if (a.type === "folder" && b.type === "note") {
+      return -1;
+    }
+    if (a.type === "note" && b.type === "folder") {
+      return 1;
+    }
+    return 0;
+  };
+
   const handleAddSubmit = async (e) => {
     try {
       e.preventDefault();
       const files = new Files();
-      console.log(newFileType)
+      console.log(newFileType);
 
       if (newFileType === "folder") {
         await files.createFolder(newFileName);
@@ -34,7 +44,7 @@ function Home() {
         await files.createNote(newFileName);
       }
       await updateFiles();
-      toggleModal()
+      toggleModal();
     } catch (err) {
       console.log(err);
     }
@@ -42,7 +52,9 @@ function Home() {
 
   const updateFiles = async () => {
     const files = new Files();
-    setFilesList(await files.getAll());
+    let list = await files.getAll();
+    list.sort(orderItemsByType);
+    setFilesList(list);
   };
 
   useEffect(() => {

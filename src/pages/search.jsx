@@ -9,7 +9,11 @@ function SearchPage() {
   return (
     <>
       <Main>
-        <InputText placeholder="Search">
+        <InputText
+          placeholder="Search"
+          id="search"
+          name="search"
+        >
           <Search className="absolute right-1 top-[14px] h-5 stroke-grade-black-100" />
         </InputText>
         <div className="h-4"></div>

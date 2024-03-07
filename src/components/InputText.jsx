@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 function InputText({
   children,
   type,
@@ -6,8 +8,19 @@ function InputText({
   placeholder,
   onChange,
   onInput,
-  autoComplete
+  autoComplete,
+  autoFocus,
 }) {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current = document.getElementById(id);
+
+    if (autoFocus === "on") {
+      inputRef.current.focus();
+    }
+  });
+
   return (
     <div className="relative">
       <input
@@ -17,12 +30,12 @@ function InputText({
         id={id}
         onChange={onChange}
         onInput={onInput}
-        autoFocus
         autoComplete={autoComplete}
+        placeholder=""
       />
       <label
         htmlFor={id}
-        className="absolute left-0 top-3 cursor-text text-grade-black-100 transition-all peer-focus:-top-3 peer-focus:text-xs peer-focus:text-grade-black-100"
+        className="absolute -top-3 left-0 cursor-text text-xs text-grade-black-100 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-3 peer-focus:text-xs peer-focus:text-grade-black-100"
       >
         {placeholder}
       </label>

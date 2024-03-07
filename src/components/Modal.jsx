@@ -6,7 +6,7 @@ function Modal({ children, id, openState, toggleFunction, title }) {
       className={`bg-grade-modal-bg fixed left-0 top-0 grid h-screen w-screen place-content-center ${openState ? "visble" : "invisible"}`}
       id={id}
     >
-      <div className="min-h-28 w-[calc(100vw-36px)] rounded-xl bg-grade-white-100 shadow-xl">
+      <div className="min-h-28 w-[calc(100vw-36px)] rounded-xl bg-grade-white-100 shadow-xl max-w-xl">
         <ModalHeader closeFunction={toggleFunction} />
         <div className="flex flex-col gap-7 px-5 py-8">
           <h1 className="text-xl">{title}</h1>
